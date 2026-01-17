@@ -42,6 +42,8 @@ import org.telegram.tgnet.TLRPC;
 import org.telegram.ui.ActionBar.BaseFragment;
 import org.telegram.ui.Adapters.DrawerLayoutAdapter;
 import org.telegram.ui.Components.ForegroundDetector;
+import org.telegram.ui.LaunchActivity;
+import org.telegram.ui.NugramSettingsActivity;
 import org.telegram.ui.IUpdateButton;
 import org.telegram.ui.IUpdateLayout;
 import org.telegram.ui.LauncherIconController;
@@ -668,7 +670,15 @@ public class ApplicationLoader extends Application {
     }
 
     public boolean extendDrawer(ArrayList<DrawerLayoutAdapter.Item> items) {
-        return false;
+        items.add(new DrawerLayoutAdapter.Item(90, LocaleController.getString(R.string.NugramSettings), R.drawable.msg_settings).onClick(v -> {
+            BaseFragment fragment = LaunchActivity.getSafeLastFragment();
+            if (fragment != null) {
+                fragment.presentFragment(new NugramSettingsActivity());
+            } else if (LaunchActivity.instance != null) {
+                LaunchActivity.instance.presentFragment(new NugramSettingsActivity());
+            }
+        }));
+        return true;
     }
 
     public boolean checkRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {

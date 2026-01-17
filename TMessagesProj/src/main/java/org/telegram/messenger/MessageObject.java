@@ -5706,7 +5706,10 @@ public class MessageObject {
             } else {
                 if (messageOwner.message != null) {
                     try {
-                        if (messageOwner.message.length() > 200) {
+                        boolean filterZalgo = MessagesController.getGlobalMainSettings().getBoolean("nugram_filter_zalgo", true);
+                        if (filterZalgo) {
+                            messageText = AndroidUtilities.BAD_CHARS_MESSAGE_LONG_PATTERN.matcher(messageOwner.message).replaceAll("\u200C");
+                        } else if (messageOwner.message.length() > 200) {
                             messageText = AndroidUtilities.BAD_CHARS_MESSAGE_LONG_PATTERN.matcher(messageOwner.message).replaceAll("\u200C");
                         } else {
                             messageText = AndroidUtilities.BAD_CHARS_MESSAGE_PATTERN.matcher(messageOwner.message).replaceAll("\u200C");

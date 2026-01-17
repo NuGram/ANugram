@@ -10226,4 +10226,8 @@
     <string name="StakeDiceActionYouLost">You lost 💎 %s</string>
     <string name="StakeDiceActionWon">un1 won 💎 %s</string>
     <string name="StakeDiceActionLost">un1 lost 💎 %s</string>
+    <string name="NugramSettings">Nugram settings</string>
+    <string name="NugramSettingsToggle">Enable Nugram options</string>
+    <string name="NugramFilterZalgo">Filter Zalgo</string>
+    <string name="NugramSettingsInfo">Manage Nugram-specific preferences.</string>
 </resources>

@@ -56,6 +56,12 @@ public class UserObject {
             return LocaleController.getString(R.string.HiddenName);
         }
         String name = AndroidUtilities.removeRTL(AndroidUtilities.removeDiacritics(ContactsController.formatName(user.first_name, user.last_name)));
+        if (MessagesController.getGlobalMainSettings().getBoolean("nugram_filter_zalgo", true)) {
+            try {
+                name = AndroidUtilities.BAD_CHARS_MESSAGE_LONG_PATTERN.matcher(name).replaceAll("\u200C");
+            } catch (Throwable ignore) {
+            }
+        }
         return name.length() != 0 || TextUtils.isEmpty(user.phone) ? name : PhoneFormat.getInstance().format("+" + user.phone);
     }
 
